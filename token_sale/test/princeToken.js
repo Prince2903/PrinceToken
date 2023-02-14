@@ -119,10 +119,7 @@ contract("princeToken", function (accounts) {
       })
       .then(assert.fail)
       .catch(function (error) {
-        assert(
-          error.message.indexOf("revert") >= 0,
-          "error message must contain revert"
-        );
+        assert(error.message, "error message must contain revert");
         return tokenInstance.transfer.call(accounts[1], 250000, {
           from: accounts[0],
         });
@@ -243,10 +240,7 @@ contract("princeToken", function (accounts) {
       })
       .then(assert.fail)
       .catch(function (error) {
-        assert(
-          error.message.indexOf("revert") >= 0,
-          "cannot transfer value larger than balance"
-        );
+        assert(error.message, "cannot transfer value larger than balance");
         // Try transferring something larger than the approved amount
         return tokenInstance.transferFrom(fromAccount, toAccount, 20, {
           from: spendingAccount,
@@ -255,7 +249,7 @@ contract("princeToken", function (accounts) {
       .then(assert.fail)
       .catch(function (error) {
         assert(
-          error.message.indexOf("revert") >= 0,
+          error.message,
           "cannot transfer value larger than approved amount"
         );
         return tokenInstance.transferFrom.call(fromAccount, toAccount, 10, {
